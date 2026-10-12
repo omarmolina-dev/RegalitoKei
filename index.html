@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keivampyx</title>
+<!-- =====================================================================
+     Keivampyx <3  |  index.html  (el contenido: textos, fotos y enlaces)
+
+     LOS TRES ARCHIVOS DEBEN ESTAR EN LA MISMA CARPETA:
+       index.html  -> este archivo, con todo el contenido
+       style.css   -> colores, fuentes y diseño
+       script.js   -> hace funcionar la subida de fotos
+
+     CÓMO EDITAR:
+       Busca los textos que están entre corchetes, por ejemplo [ lugar ], y
+       reemplázalos por lo tuyo. Cada ventana de la página es un bloque
+       <section> o <article> con un comentario encima que dice qué es.
+     ===================================================================== -->
+
+<!-- Fuentes de Google Fonts: Bagel Fat One (títulos), Nunito (párrafos) y VT323 (letra de computadora vieja).
+     Los dos "preconnect" solo hacen que carguen un poco más rápido. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;700;800&family=VT323&display=swap"
+  rel="stylesheet">
+
+<!-- Conecta el archivo de estilos -->
+<link rel="stylesheet" href="style.css">
+
+
+<!-- .wrap = contenedor que envuelve toda la página -->
+<div class="wrap">
+
+  <!-- MARQUESINA: la franja rosa de arriba con el texto que se desliza.
+       El texto está repetido dos veces a propósito, para que el movimiento no tenga cortes.
+       Si cambias el mensaje, cámbialo en los dos span. -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>★ bienvenido a tu rincón de internet ★ aquí vive todo lo que me gusta de ti ★ muaaa ★</span>
+      <span>★ bienvenida a tu rincón de internet ★ aquí vive todo lo que me gusta de ti ★ muaaa ★</span>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO: el título grande y la línea de abajo.
+       &lt;3 se escribe así para que el navegador muestre el símbolo "<3". -->
+  <header>
+    <h1>Keivampyx &lt;3</h1>
+    <p class="tagline">todo lo que me gusta de ti <b>*</b> TQMMM <b>*</b></p>
+  </header>
+
+  <!-- .grid = las dos columnas: la izquierda (aside) y la derecha (main) -->
+  <div class="grid">
+
+    <!-- ===================== COLUMNA IZQUIERDA ===================== -->
+    <aside class="col">
+
+      <!-- VENTANA: PERFIL. Foto principal y datos básicos de ella.
+           Estructura de toda ventana: .win (marco) > .bar (barra de título) + .inner (contenido).
+           El título de la barra va en el span con class="t".
+           Los tres botoncitos <i> son solo decoración. -->
+      <section class="win" aria-labelledby="perfil-t">
+        <div class="bar"><span class="t" id="perfil-t">perfil.exe</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <!-- RECUADRO DE FOTO. data-slot es el nombre con el que se guarda la foto; no repitas nombres.
+               El texto del span aparece mientras no hay foto. -->
+          <img class="pic" src="image/perfil.jpg" alt="Foto de perfil">
+          <h2 class="name">la diseñadora más linda</h2>
+          <!-- LISTA DE DATOS: dt = etiqueta, dd = valor. Agrega más pares dt/dd si quieres. -->
+          <dl class="facts">
+            <dt>oficio</dt>
+            <dd>diseñadora</dd>
+            <dt>colores</dt>
+            <dd>rosa, negro y verde olivo</dd>
+            <dt>superpoder</dt>
+            <dd>ver lo que nadie ve</dd>
+            <dt>estado</dt>
+            <dd>acuoso</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- VENTANA: PALETA. Cuadritos con sus colores favoritos.
+           Cada div define su color en el atributo style, donde dice c: seguido del código del color.
+           Para agregar uno, copia una línea y cambia el código y el nombre. -->
+      <section class="win" aria-labelledby="pal-t">
+        <div class="bar"><span class="t" id="pal-t">paleta_oficial</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="sw">
+            <div style="--c:#636b2f">verde olivo</div>
+            <div style="--c:#ffb3d9">rosa pastel</div>
+            <div style="--c:#0b0610">negro</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VENTANA: FRUTAS FAVORITAS.
+           La etiqueta con class="chip top" sale en rosa y es la fruta número uno.
+           Agrega o quita etiquetas copiando una línea <span class="chip">. -->
+      <section class="win" aria-labelledby="fr-t">
+        <div class="bar"><span class="t" id="fr-t">frutas_favoritas</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="chips">
+            <span class="chip top">Mandarinas :3</span>
+            <span class="chip">Papaya :0</span>
+            <span class="chip">Manzana verde uwu</span>
+            <span class="chip">Mango :D</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VENTANA: SONANDO AHORA. Canciones con enlace a Spotify.
+           Para cada canción:
+             1. En Spotify: tres puntos de la canción > Compartir > Copiar enlace de la canción.
+             2. Pega ese enlace en el href, en lugar de https://open.spotify.com/
+             3. Cambia el texto entre corchetes por el título y el artista.
+           target="_blank" abre el enlace en una pestaña nueva.
+           rel="noopener" es una medida de seguridad; déjalo siempre. -->
+      <section class="win" aria-labelledby="np-t">
+        <div class="bar"><span class="t" id="np-t">sonando_ahora</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <!-- Reproductor real de Spotify -->
+          <div class="spotify-player">
+            <iframe data-testid="embed-iframe" style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/2ILyz51ilwZcQEjBYfl01p?utm_source=generator&theme=0&si=3e73ef3111e847a2"
+              width="100%" height="152" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </div>
+        </div>
+      </section>
+        <section class="win" aria-labelledby="np2-t">
+          <div class="bar"><span class="t" id="np-t">más_musiquita >//< </span><span class="btns"
+                  aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+          <div class="inner">
+            <!-- Reproductor real de Spotify -->
+            <div class="spotify-player">
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/6W21LNLz9Sw7sUSNWMSHRu?utm_source=generator&si=abafc6dc07174deb"
+                width="100%" height="152" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/4bLCPfBLKlqiONo6TALTh5?utm_source=generator&si=c92d39c6465c4282"
+                width="100%" height="152" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/5TTGoX70AFrTvuEtqHK37S?utm_source=generator&si=2286855d112d4fda"
+                width="100%" height="152" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- VENTANA: CONTADOR. Es solo decoración (el número no cuenta visitas de verdad).
+           Puedes cambiar el texto o el número. -->
+        <section class="win" aria-labelledby="cnt-t">
+          <div class="bar"><span class="t" id="cnt-t">contador.dll</span><span class="btns"
+              aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+          <div class="inner">
+            <div class="counter">eres la visita <b>000001</b> y la única muejejejejejej</div>
+          </div>
+        </section>
+
+        <!-- VENTANA: ARTE ASCII. Un dibujo hecho con letras y símbolos.
+           Para cambiarlo, reemplaza lo que está dentro del pre por el dibujo que quieras.
+           Respeta los espacios y saltos de línea, porque el pre los conserva tal cual.
+           Si el dibujo lleva el símbolo < o &, escríbelos como &lt; y &amp;.
+           aria-label describe el dibujo para lectores de pantalla; cámbialo si cambias el dibujo. -->
+        <section class="win" aria-labelledby="asc-t">
+          <div class="bar"><span class="t" id="asc-t">arte_ascii.txt</span><span class="btns"
+              aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+          <div class="inner">
+            <pre class="ascii" aria-label="Una flor dibujada con letras">
+    _
+  _(_)_
+ (_)@(_)
+   (_)\
+      |/
+     \|
+ ~~~~~|~~~~</pre>
+          </div>
+        </section>
+
+    </aside>
+
+    <!-- ===================== COLUMNA DERECHA ===================== -->
+    <main class="col">
+
+      <!-- ENTRADA 01. Estructura de toda entrada de blog:
+             h2 = título
+             .meta = línea de humor y canción
+             p = el texto
+           El span class="new" es la etiqueta NEW! que parpadea; bórrala si no la quieres. -->
+      <article class="win post" aria-labelledby="e1">
+        <div class="bar"><span class="t">entrada_01.txt</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <h2 id="e1">tu ojo para las cosas <span class="new">NEW!</span></h2>
+          <div class="meta"><span>humor: <b>admirando</b></span><span>sonando: <b><a
+                  href="https://open.spotify.com/track/2BPmAFsiy6vwDceybqIAjw?si=73c4f8be6694451f" target="_blank">
+                  francés limón - enanitos verdes </a></b></span></div>
+          <p>Ves un anuncio, una portada o un empaque y en dos segundos sabes qué le falta y qué le sobra. Yo veo algo
+            bonito y ahí me quedo. Tú ves por qué es bonito. Me gusta que me hagas ver el mundo así <33. </p>
+        </div>
+      </article>
+
+      <!-- ENTRADA 02. Incluye una cita destacada (blockquote class="pull") con borde punteado. -->
+      <article class="win post" aria-labelledby="e2">
+        <div class="bar"><span class="t">entrada_02.txt</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <h2 id="e2">el rosa y el verde olivo</h2>
+          <div class="meta"><span>humor: <b>sonriendo solo</b></span><span>sonando: <b><a
+                  href="https://open.spotify.com/track/1TWAUx1pXxA5XxJmHMGT0b?si=963b0d697d2549fd" target="_blank"> sal
+                  rosa - LATIN MAFIA </a></b></span></div>
+          <p>literalmente no tengo ni idea de cómo juntar estos colores kasjdaks pero tqmmm aun que me lo hayas puesto
+            bieeen difícil u.u, por cierto descubrí apenas que te gusta el verde olivoo love u <3. </p>
+              <blockquote class="pull">"perra sé seria"</blockquote>
+        </div>
+      </article>
+
+      <!-- ENTRADA 03 -->
+      <article class="win post" aria-labelledby="e3">
+        <div class="bar"><span class="t">entrada_03.txt</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <h2 id="e3">cuando me hablas de tus gustos</h2>
+          <div class="meta"><span>humor: <b>concentrado</b></span><span>sonando: <b><a
+                  href="https://open.spotify.com/track/1TWAUx1pXxA5XxJmHMGT0b?si=963b0d697d2549fd" target="_blank"> sal
+                  rosa - LATIN MAFIA </a></b></span></div>
+          <p>Hay una cara que pones cuando me cuentas las cosas que más te gustan que me enamora más cada vez que te veo.
+            Es tan hot oírte hablar de tus gustos, por favor nunca te calles amor.</p>
+          <blockquote class="pull">"#YAAS #MOOD"</blockquote>
+      </article>
+      <!-- VENTANA: NUESTRA PRIMERA CITA.
+           .pair acomoda la foto a la izquierda y los datos a la derecha
+           (en el celular quedan uno debajo del otro).
+           El style="padding:0" del segundo .inner quita el margen extra de adentro. -->
+      <section class="win post" aria-labelledby="cita-t">
+        <div class="bar"><span class="t" id="cita-t">nuestra_primera_cita.txt</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="pair">
+            <div class="frame"><img class="pic" src="image/cita.jpg" alt="Nuestra primera cita"></div>
+            <div class="inner" style="padding:0">
+              <dl class="facts">
+                <dt>dónde</dt>
+                <dd>tanuki café y cine</dd>
+                <dt>cuándo</dt>
+                <dd>31 - 08 - 26</dd>
+                <dt>pedimos</dt>
+                <dd>matcha latte frío y chai latte caliente</dd>
+                <dt>sonaba</dt>
+                <dd><a href="https://open.spotify.com/track/41P6Tnd8KIHqON0QIydx6a?si=0b3eb39456e740d9">the perfect pair
+                    - beabadoobee</a></dd>
+              </dl>
+              <p>Recuerdo que la primera vez que te vi me quedé en shock, no captaba cómo alguien tan hermoso podía
+                existir en este mundo, pero dios mío no me arrepineto nada de haberte invitado a salir ese día. Ibas
+                taaan bonita, nunca olvidaré lo que sentí en mi corazoncito cuando te vi salir de tu casa.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VENTANA: PRIMERAS FLORES A MANO. Misma estructura que la primera cita: foto + texto. -->
+      <section class="win post" aria-labelledby="flor-t">
+        <div class="bar"><span class="t" id="flor-t">primeras_flores_a_mano</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="pair">
+            <div class="frame"><img class="pic" src="image/flores.jpg" alt="Las flores que te hice"></div>
+            <div class="inner" style="padding:0">
+              <h2>las flores que te hice</h2>
+              <dl class="facts">
+                <dt>cuándo</dt>
+                <dd>21 - 09 - 26</dd>
+              </dl>
+              <p>Uhh si supieras lo que tardé aksjdkas, fui como a 5 florerías y viveros buscando flores en específico
+                pero se logró y conseguí juntarlas todas y un listón que me dio mi hermana, todavía me acuerdo los ojos
+                que hiciste cuando lo viste. Sentí tan lindo que quise tener un jardín de flores solo para ti.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <!-- VENTANA: SUS MANGAS FAVORITOS.
+           .shelf = fila de portadas sobre una repisa rosa.
+           class="pic tall" es la imagen con forma de portada (alta).
+           .cap es el título que va debajo de cada portada.
+           Para agregar otro manga, copia un bloque .frame completo y cambia el nombre del archivo. -->
+      <section class="win post" aria-labelledby="manga-t">
+        <div class="bar"><span class="t" id="manga-t">algunos_mangas_favoritos</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="shelf">
+            <div class="frame"><img class="pic tall" src="image/manga1.png" alt="Portada del manga 1">
+              <div class="cap">Mr.A's Farm</div>
+            </div>
+            <div class="frame"><img class="pic tall" src="image/manga2.png" alt="Portada del manga 2">
+              <div class="cap">Dorohedoro</div>
+            </div>
+            <div class="frame"><img class="pic tall" src="image/manga3.png" alt="Portada del manga 3">
+              <div class="cap">Love Stage</div>
+            </div>
+          </div>
+          <p>Sin comentarios con el primero bb, loveu y tus gustos raros tmb (ñom), gracias por enseñarme dorohedoro muaaa >//< y nunca he leído love stage pero dijiste que me lo prestarías algún día muaaa.</p>
+        </div>
+      </section>
+
+      <!-- VENTANA: ÁLBUM. Seis fotos cuadradas (class="pic wide") con pie de foto.
+           Cada foto apunta a su propio archivo (album1.jpg, album2.jpg...).
+           El texto alt describe la foto para lectores de pantalla; cámbialo por algo más específico si quieres. -->
+      <section class="win post" aria-labelledby="alb-t">
+        <div class="bar"><span class="t" id="alb-t">mi_álbum_de_el</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <div class="album">
+            <div class="frame"><img class="pic wide" src="image/album1.png" alt="Foto 1 del álbum">
+              <div class="cap">el día que te vi por primera vez  (así es una historia de lani)</div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/album2.jpg" alt="Foto 2 del álbum">
+              <div class="cap">la vez que duramos 10 horas en llamada (nuestra primera llamada btw :3)</div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/album3.jpg" alt="Foto 3 del álbum">
+              <div class="cap">mi favorita >///< (megahotttt) </div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/album4.jpg" alt="Foto 4 del álbum">
+              <div class="cap">Esta fue mi foto waooooowwsssssssss payasitahot</div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/album5.jpg" alt="Foto 5 del álbum">
+              <div class="cap">La primer foto que mandaste con mi pijama >~<</div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/album6.jpeg" alt="Foto 6 del álbum">
+              <div class="cap">Cuando elegiste el diseño que me gustó y luego lo vi en personaaaa CUTEE</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VENTANA: SU TRABAJO. Dos diseños suyos (trabajo1.jpg y trabajo2.jpg). -->
+      <section class="win post" aria-labelledby="work-t">
+        <div class="bar"><span class="t" id="work-t">su_trabajo.psd</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <p>Lo que más me impresiona es verte convertir una idea en algo que se puede tocar. Aquí van mis diseños suyos
+            favoritos.</p>
+          <div class="work">
+            <div class="frame"><img class="pic wide" src="image/trabajo1.jpeg" alt="Diseño 1">
+              <div class="cap">Aerografito</div>
+            </div>
+            <div class="frame"><img class="pic wide" src="image/trabajo2.jpeg" alt="Diseño 2">
+              <div class="cap">Tu diseño de camiseta meooow</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ENTRADA 04: el cierre de la página -->
+      <article class="win post" aria-labelledby="e4">
+        <div class="bar"><span class="t">entrada_04.txt</span><span class="btns"
+            aria-hidden="true"><i>_</i><i>□</i><i>x</i></span></div>
+        <div class="inner">
+          <h2 id="e4">lo que dejo para el final</h2>
+          <div class="meta"><span>humor: <b>agradecido</b></span><span>sonando: <b>[ canción ]</b></span></div>
+          <p>Esta página es chiquita comparada con todo lo que siento por ti :3. Por eso la 	dejaré abierta: la voy a seguir
+            actualizando. MEGAAAA.</p>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+  <!-- PIE DE PÁGINA: etiquetitas tipo botón y la firma -->
+  <footer>
+    <div class="badges" aria-hidden="true"><span>hecho con amor</span><span>100% rosa</span></div>
+    <div>hecho a mano por Mawi <span class="heart">&lt;3</span> 2026</div>
+  </footer>
+
+</div>
+
+<!-- Conecta el archivo de scripts. "defer" hace que se ejecute cuando la página ya terminó de cargar. -->
+<script src="script.js" defer></script>

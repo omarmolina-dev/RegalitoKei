@@ -1,0 +1,306 @@
+/* ==========================================================================
+   Keivampyx <3  |  style.css  (colores, fuentes y diseño de toda la página)
+
+   CÓMO ESTÁ ORGANIZADO ESTE ARCHIVO (de arriba hacia abajo):
+     1. Variables  -> colores y fuentes. Cambia aquí los colores de toda la página.
+     2. Base       -> fondo, texto y contenedor general.
+     3. Secciones  -> cada bloque de la página (marquesina, título, ventanas...).
+     4. Móvil      -> ajustes para pantallas chicas (al final).
+
+   Idea general del diseño: blog estilo Y2K de dos columnas. A la izquierda va el
+   perfil y los extras, a la derecha las entradas. Todo vive dentro de "ventanas"
+   retro con barra de título rosa.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. VARIABLES
+   Cada color tiene un nombre. En el resto del archivo se usan con var(--nombre),
+   así que si cambias un valor aquí, cambia en todos los lugares donde se usa.
+   ========================================================================== */
+:root {
+  --black: #0b0610;   /* negro con un toque violeta: fondo de la página */
+  --plum: #1c0b1f;    /* ciruela oscuro: fondo del interior de las ventanas */
+  --pink: #ff4fa3;    /* rosa chicle: color principal (barras, bordes, títulos) */
+  --bubble: #ffb3d9;  /* rosa pastel: texto secundario y detalles suaves */
+  --silver: #e7e0ea;  /* plateado: bordes claros de los biseles y subtítulos */
+  --deep: #5a1740;    /* vino oscuro: sombra de los biseles (da efecto 3D) */
+  --ink: #ffe6f3;     /* blanco rosado: color del texto normal */
+
+  /* Fuentes (se cargan desde Google Fonts en index.html).
+     Después de la fuente principal van otras de respaldo por si no carga. */
+  --font-display: "Bagel Fat One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif; /* títulos gordos y redondos */
+  --font-body: "Nunito", "Trebuchet MS", Verdana, sans-serif;                            /* texto de los párrafos */
+  --font-util: "VT323", "Courier New", monospace;                                        /* letra tipo computadora vieja */
+
+  color-scheme: dark; /* le avisa al navegador que la página es oscura (barras de scroll, etc.) */
+}
+
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+
+/* Hace que el padding y el borde cuenten dentro del ancho de cada caja.
+   Sin esto, algunas cajas se saldrían de la pantalla. */
+* { box-sizing: border-box; }
+
+/* El fondo de toda la página: negro con estrellitas rosas dibujadas en un SVG
+   incrustado (la parte larga que empieza con "data:image/svg+xml").
+   Se repite solo como un mosaico. No hace falta tocarlo. */
+body {
+  margin: 0;
+  padding-inline: 16px;       /* márgenes de izquierda y derecha */
+  padding-block: 18px 40px;   /* espacio arriba (18px) y abajo (40px) */
+  background-color: var(--black);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M14 4l1.7 6.3L22 12l-6.3 1.7L14 20l-1.7-6.3L6 12l6.3-1.7z' fill='%23ff4fa3' fill-opacity='.38'/%3E%3Ccircle cx='42' cy='38' r='1.6' fill='%23ffb3d9' fill-opacity='.45'/%3E%3Cpath d='M44 8l.9 3.1L48 12l-3.1.9L44 16l-.9-3.1L40 12l3.1-.9z' fill='%23e7e0ea' fill-opacity='.3'/%3E%3C/svg%3E");
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;          /* espacio entre renglones */
+}
+
+/* Color de los enlaces normales */
+a { color: var(--bubble); }
+
+/* .wrap = el contenedor que envuelve toda la página.
+   Limita el ancho a 1040px y lo centra. Dentro apila todo en una columna. */
+.wrap { max-width: 1040px; margin-inline: auto; display: flex; flex-direction: column; gap: 18px; }
+
+
+/* ==========================================================================
+   3. SECCIONES
+   ========================================================================== */
+
+/* ---- Marquesina: la franja rosa de arriba con el texto que se desliza ---- */
+.marquee {
+  overflow: hidden; /* esconde el texto que sale de la franja */
+  border: 2px solid;
+  border-color: var(--bubble) var(--deep) var(--deep) var(--bubble); /* arriba izq. claro, abajo der. oscuro = efecto botón */
+  background: var(--pink);
+  color: var(--black);
+  font-family: var(--font-util);
+  font-size: 22px;
+  letter-spacing: .06em;
+  white-space: nowrap; /* evita que el texto salte de renglón */
+}
+/* .track = la tira de texto que se mueve. En el HTML el texto está repetido dos
+   veces; la animación recorre la mitad y vuelve a empezar, así parece infinita.
+   Para cambiar la velocidad, cambia los 28s (más número = más lento). */
+.marquee .track { display: inline-flex; gap: 2.5em; padding-block: 2px; animation: scroll 28s linear infinite; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* ---- Encabezado: el título grande "Keivampyx <3" y la línea de abajo ---- */
+header { text-align: center; padding-block: 8px 2px; }
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1;
+  font-size: clamp(2.6rem, 11vw, 5.6rem); /* tamaño que se adapta al ancho de la pantalla (mínimo, ideal, máximo) */
+  color: var(--bubble);
+  text-wrap: balance; /* reparte las palabras parejo si el título ocupa dos renglones */
+  /* Sombras apiladas que dan el efecto de letras con relieve:
+     rosa, un hueco negro y una última capa plateada. */
+  text-shadow: 3px 3px 0 var(--pink), 6px 6px 0 var(--black), 7px 7px 0 var(--silver);
+  letter-spacing: .01em;
+}
+.tagline { margin: 18px 0 0; font-family: var(--font-util); font-size: 26px; color: var(--silver); letter-spacing: .08em; text-transform: lowercase; }
+.tagline b { color: var(--pink); font-weight: 400; } /* los asteriscos separadores en rosa */
+
+/* ---- Distribución en dos columnas ----
+   .grid = las dos columnas juntas. La izquierda mide máximo 300px y la derecha
+   ocupa todo lo demás. .col = cada columna; apila sus ventanas hacia abajo. */
+.grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+
+/* ---- Ventana retro (el bloque que se repite por toda la página) ----
+   .win  = la ventana completa (marco + sombra rosa)
+   .bar  = la barra de título con degradado rosa
+   .btns = los tres botoncitos falsos de la derecha (minimizar, maximizar, cerrar)
+   .inner = el interior de la ventana, donde va el contenido */
+.win {
+  background: var(--plum);
+  border: 2px solid;
+  border-color: var(--silver) var(--deep) var(--deep) var(--silver); /* bisel 3D */
+  box-shadow: 5px 5px 0 var(--pink); /* sombra rosa sólida, sin difuminar */
+  min-width: 0;
+}
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 4px 6px 4px 10px;
+  /* Degradado con corte al centro: así parece cromo brillante de los años 2000 */
+  background: linear-gradient(180deg, #ffd6ec 0%, var(--pink) 48%, #c42a7b 52%, #ff8cc6 100%);
+  color: var(--black);
+  font-family: var(--font-util);
+  font-size: 22px;
+  letter-spacing: .05em;
+  text-transform: lowercase;
+}
+/* .t = el texto del título de la ventana. Si es muy largo se corta con "..." */
+.bar span.t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.btns { display: flex; gap: 3px; flex-shrink: 0; }
+.btns i { display: block; width: 18px; height: 18px; background: var(--silver); border: 2px solid; border-color: #fff var(--deep) var(--deep) #fff; font: 700 11px/12px var(--font-body); text-align: center; color: var(--black); font-style: normal; }
+.inner { padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* ---- Fotos: los recuadros donde se suben las imágenes ----
+   .photo = el recuadro con borde punteado. Cuando todavía no hay foto muestra
+            el texto "+ foto..." (el <span>). Es un <label> con un <input> invisible
+            encima, por eso al tocarlo se abre el selector de archivos.
+   .wide  = versión cuadrada (para el álbum y los diseños)
+   .tall  = versión alta (para las portadas de manga; está más abajo)
+   .has   = clase que agrega script.js cuando ya hay una foto puesta
+   .frame = el paquete "foto + pie de foto"
+   .cap   = el pie de foto (texto debajo de la imagen) */
+.photo {
+  position: relative; display: grid; place-items: center;
+  width: 100%; aspect-ratio: 4 / 5; max-width: 100%; /* proporción vertical por defecto */
+  background-color: #2a0f2e;
+  background-size: cover; background-position: center; /* la foto llena el recuadro sin deformarse */
+  border: 2px dashed var(--pink);
+  cursor: pointer; overflow: hidden; text-align: center; padding: 10px;
+}
+.photo.wide { aspect-ratio: 1 / 1; }
+.photo input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; } /* input invisible que cubre todo el recuadro */
+.photo:focus-within { outline: 3px solid var(--silver); outline-offset: 2px; } /* marco visible si se navega con teclado */
+.photo span { font-family: var(--font-util); font-size: 20px; color: var(--bubble); line-height: 1.1; pointer-events: none; }
+.photo.has { border-style: solid; border-color: var(--silver); } /* con foto: borde sólido en vez de punteado */
+.photo.has span { display: none; }                                /* con foto: se esconde el texto "+ foto" */
+.frame { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cap { font-family: var(--font-util); font-size: 20px; color: var(--silver); text-align: center; line-height: 1; }
+
+/* ---- Perfil: nombre y lista de datos ----
+   .name  = el nombre grande en rosa
+   .facts = lista de datos en dos columnas (etiqueta a la izquierda, valor a la derecha).
+            dt = la etiqueta ("oficio"), dd = el valor ("diseñadora") */
+.name { font-family: var(--font-display); font-size: 1.7rem; line-height: 1.05; color: var(--pink); margin: 0; text-wrap: balance; }
+.facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: .95rem; }
+.facts dt { font-family: var(--font-util); font-size: 20px; color: var(--bubble); text-transform: lowercase; }
+.facts dd { margin: 0; min-width: 0; }
+/* Foto fija (imagen de la carpeta image/) */
+.pic { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 2px solid var(--silver); }
+/* ---- Paleta de colores ----
+   .sw = la cuadrícula de 3 muestras. Cada muestra toma su color de la variable
+   --c que se define en el HTML (style="--c:#ff4fa3"). Para agregar un color,
+   agrega otro <div> en el HTML con su propio --c. */
+.sw { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.sw div { display: flex; flex-direction: column; gap: 4px; font-family: var(--font-util); font-size: 18px; line-height: 1; text-align: center; color: var(--silver); }
+.sw div::before { content: ""; display: block; aspect-ratio: 1; border: 2px solid var(--silver); background: var(--c); } /* el cuadrito de color */
+
+/* ---- Reproductor "sonando ahora" (decorativo) ----
+   .np-title = título de la canción principal (es un enlace)
+   .np-sub   = el artista
+   .prog     = la barra de progreso falsa; la <i> de adentro es la parte rellena
+               (cambia width: 38% para que se vea más o menos avanzada)
+   .ctrl     = los botones falsos de anterior / play / siguiente
+   ol.songs  = la lista numerada de las otras canciones */
+
+spotify-player { margin-bottom: 12px; padding: 10px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); }
+
+.np-title { font-family: var(--font-util); font-size: 24px; line-height: 1; color: var(--ink); }
+.np-sub { font-family: var(--font-util); font-size: 20px; color: var(--bubble); line-height: 1; }
+.prog { height: 10px; background: var(--black); border: 2px solid; border-color: var(--deep) var(--silver) var(--silver) var(--deep); }
+.prog i { display: block; height: 100%; width: 38%; background: repeating-linear-gradient(90deg, var(--pink) 0 6px, var(--bubble) 6px 8px); }
+.ctrl { display: flex; gap: 6px; justify-content: center; font-family: var(--font-util); font-size: 20px; color: var(--silver); letter-spacing: .3em; }
+ol.songs { margin: 0; padding-left: 1.6em; font-family: var(--font-util); font-size: 21px; line-height: 1.25; color: var(--ink); }
+ol.songs li::marker { color: var(--pink); } /* el número de cada canción en rosa */
+ol.songs small { font-size: inherit; color: var(--bubble); } /* el nombre del artista en rosa pastel */
+
+/* ---- Enlaces de las canciones (Spotify) ----
+   Subrayado rosa, y al pasar el mouse el texto se pone rosa. */
+a.np-title { display: block; text-decoration: underline; text-decoration-color: var(--pink); text-underline-offset: 3px; color: var(--ink); }
+ol.songs a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--pink); text-underline-offset: 3px; }
+a.np-title:hover, ol.songs a:hover { color: var(--pink); }
+a.np-title:focus-visible, ol.songs a:focus-visible { outline: 2px solid var(--silver); outline-offset: 2px; } /* marco al navegar con teclado */
+
+/* ---- Etiquetas de frutas ----
+   .chips = el contenedor; las etiquetas pasan al siguiente renglón si no caben.
+   .chip  = cada etiqueta (negra con letras rosa pastel)
+   .top   = la etiqueta destacada (rosa), para la fruta favorita número uno */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--font-util); font-size: 22px; line-height: 1; padding: 4px 10px; background: var(--black); color: var(--bubble); border: 2px solid; border-color: var(--silver) var(--deep) var(--deep) var(--silver); }
+.chip.top { background: var(--pink); color: var(--black); }
+
+/* ---- Estante de mangas ----
+   .shelf = tres portadas en fila sobre una "repisa" (la línea rosa de abajo)
+   .tall  = recuadro de foto con proporción de portada (2 de ancho por 3 de alto) */
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-bottom: 8px; border-bottom: 6px solid var(--pink); }
+.photo.tall { aspect-ratio: 2 / 3; }
+
+/* ---- Dos columnas dentro de una ventana ----
+   .pair = foto a la izquierda (máximo 220px) y texto a la derecha.
+   Se usa en "primera cita" y "primeras flores". */
+.pair { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: start; }
+
+/* ---- Arte ASCII ----
+   pre.ascii = caja negra con letra monoespaciada para dibujar con caracteres.
+   Si el dibujo es más ancho que la caja, aparece una barra de scroll horizontal. */
+pre.ascii { margin: 0; overflow-x: auto; font-family: var(--font-util); font-size: 22px; line-height: 1.05; color: var(--bubble); background: var(--black); padding: 12px; border: 2px solid; border-color: var(--deep) var(--silver) var(--silver) var(--deep); }
+
+/* ---- Contador de visitas (decorativo) ----
+   .counter   = la frase completa
+   .counter b = el número, dentro de una cajita hundida como los contadores viejos */
+.counter { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-util); font-size: 20px; color: var(--silver); text-align: center; flex-wrap: wrap; }
+.counter b { font-weight: 400; background: var(--black); color: var(--pink); padding: 0 8px; border: 2px solid; border-color: var(--deep) var(--silver) var(--silver) var(--deep); letter-spacing: .2em; font-size: 26px; }
+
+/* ---- Entradas del blog ----
+   .post h2 = título de cada entrada
+   .meta    = línea con humor y canción ("humor: admirado")
+   .post p  = párrafo (máximo 65 caracteres de ancho para que se lea cómodo)
+   .new     = etiqueta "NEW!" que parpadea (animación blink)
+   .pull    = recuadro de cita destacada con borde punteado */
+.post h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.4rem, 4.4vw, 1.9rem); line-height: 1.1; color: var(--bubble); text-wrap: balance; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--font-util); font-size: 20px; color: var(--silver); line-height: 1.1; }
+.meta b { font-weight: 400; color: var(--pink); }
+.post p { margin: 0; max-width: 65ch; }
+.new { display: inline-block; background: var(--black); color: var(--pink); font-family: var(--font-util); font-size: 18px; padding: 0 6px; border: 1px solid var(--pink); animation: blink 1.1s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } } /* parpadeo: aparece y desaparece */
+.pull { margin: 0; padding: 10px 12px; border: 2px dotted var(--pink); background: var(--black); font-family: var(--font-util); font-size: 24px; line-height: 1.1; color: var(--bubble); }
+
+/* ---- Álbum de fotos: cuadrícula de 3 columnas ---- */
+.album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+/* ---- Su trabajo: cuadrícula de 2 columnas ---- */
+.work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+/* ---- Pie de página ----
+   .badges = las etiquetitas tipo botón ("hecho con amor", "0% spam"...)
+   .heart  = el corazón <3 en rosa */
+footer { text-align: center; font-family: var(--font-util); font-size: 20px; color: var(--silver); display: flex; flex-direction: column; gap: 6px; padding-top: 6px; }
+footer .heart { color: var(--pink); }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.badges span { background: var(--plum); border: 2px solid; border-color: var(--silver) var(--deep) var(--deep) var(--silver); padding: 0 8px; color: var(--bubble); }
+
+
+/* ==========================================================================
+   4. PANTALLAS CHICAS (celular)
+   Todo lo que está dentro de este bloque solo aplica cuando la pantalla mide
+   760px de ancho o menos.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }  /* las dos columnas pasan a ser una sola, una debajo de la otra */
+  .pair { grid-template-columns: minmax(0, 1fr); }  /* foto arriba y texto abajo */
+  .pair .photo { max-width: 260px; }                /* la foto no se estira de más */
+  .album { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* el álbum pasa de 3 a 2 columnas */
+  .win { box-shadow: 4px 4px 0 var(--pink); }       /* sombra un poco más chica */
+}
+
+/* Si la persona tiene activada la opción de "reducir movimiento" en su
+   dispositivo, se apagan la marquesina y el parpadeo del NEW!. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track { animation: none; }
+  .new { animation: none; }
+}
+.pic.tall { aspect-ratio: 2 / 3; }  /* portadas de manga */
+.pic.wide { aspect-ratio: 1 / 1; }  /* álbum y diseños */
+
+/* Reproductores de Spotify */
+.spotify-player { display: flex; flex-direction: column; gap: 10px; }
+.spotify-player iframe {
+  display: block;
+  width: 100%;
+  height: 88px;            /* alto de la tarjeta de Spotify en pantallas angostas */
+  border: 0;
+  border-radius: 12px;
+  color-scheme: light;     /* quita el fondo blanco que se ve debajo de la tarjeta */
+}
